@@ -1,62 +1,68 @@
 ---
-import Header from '../components/Header.astro';
-import Project from '../components/Project.astro';
-import Sidebar from '../components/Sidebar.astro';
+import Header from "../components/Header.astro";
+import Project from "../components/Project.astro";
+import Sidebar from "../components/Sidebar.astro";
 const projects = [
   {
-    title: "TeleJS",
-    desc: [
-      "Built a lightweight, open-source Slack API framework for efficient bot development",
-      "Developed in Node.js and published as an NPM package"
-    ],
-    tech: ["Node.js", "NPM"]
+    title:
+      "<a href='https://kahoovie.vercel.app/' target='_blank' class='project-link'>Kahoovie</a>",
+    desc: ["A Kahoot-like game focused exclusively on movies."],
+    tech: ["React", "Node.js", "Tailwind"],
   },
   {
-    title: "pyPrompter",
+    title:
+      "<a href='https://manager-choripaneada.vercel.app/' target='_blank' class='project-link'>Choripaneada CRM</a>",
     desc: [
-      "Contributed to a popular open-source Python pip package for building interactive CLIs",
-      "Developed a feature that lets you 'freeze' inquirer choices"
+      "Custom CRM built for a university event ('Choripaneada') for Systems Engineering students.",
+      "Managed user accounts, orders, and payments.",
+      "Generated QR codes for attendees to claim their food orders.",
     ],
-    tech: ["Python"]
+    tech: ["React", "Node.js", "PostgreSQL"],
   },
   {
-    title: "WebAssetHub",
+    title: "Stroke Rehab App",
     desc: [
-      "Created a web scraper tool that monitors digital assets across multiple platforms and offers them at competitive prices",
-      "Sold over 700 items"
+      "Android application designed to assist post-stroke patients in their rehabilitation process.",
+      "Currently in development.",
     ],
-    tech: ["Python", "Selenium"]
-  }
+    tech: ["Android"],
+  },
 ];
 ---
 
-<!DOCTYPE html>
-<html
->
-  <Header title="Personal Projects | Sam Bernstein" />
+<!doctype html>
+<html>
+  <Header title="Personal Projects | Ian" />
   <body>
     <div class="content">
-        <Sidebar selectedItem="personal-projects" />
+      <Sidebar selectedItem="personal-projects" />
       <nav class="main">
         <div class="container">
           <div class="back-nav-container">
             <a href="/" class="back-nav-button w-inline-block"
-              ><img src="/assets/back.svg" loading="lazy" alt="" class="back-nav-img" />
+              ><img
+                src="/assets/back.svg"
+                loading="eager"
+                alt=""
+                class="back-nav-img"
+              />
               <div>Back</div></a
             >
           </div>
           <div class="content-container">
             <h1>Personal Projects</h1>
             <section class="items-container">
-                <div class="resouce-items">
-                    {projects.map(project => (
-                      <Project 
-                        title={project.title} 
-                        desc={project.desc}
-                        tech={project.tech}
-                      />
-                    ))}
-                  </div>
+              <div class="resouce-items">
+                {
+                  projects.map((project) => (
+                    <Project
+                      title={project.title}
+                      desc={project.desc}
+                      tech={project.tech}
+                    />
+                  ))
+                }
+              </div>
             </section>
           </div>
         </div>
