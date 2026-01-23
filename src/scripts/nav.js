@@ -7,13 +7,17 @@ export function setupNav() {
   const toggleNav = () => {
     const isOpen = navMenu.classList.contains('is-open');
 
-    navMenu.classList.toggle('is-visible', !isOpen);
-    setTimeout(
-      () => {
-        navMenu.classList.toggle('is-open', !isOpen);
-      },
-      isOpen ? 300 : 10
-    );
+    if (isOpen) {
+      navMenu.classList.remove('is-open');
+      setTimeout(() => {
+        navMenu.classList.remove('is-visible');
+      }, 300);
+    } else {
+      navMenu.classList.add('is-visible');
+      setTimeout(() => {
+        navMenu.classList.add('is-open');
+      }, 10);
+    }
   };
 
   navButton.addEventListener('click', toggleNav);
