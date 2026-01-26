@@ -138,11 +138,13 @@ function getLangPath(l: string, path: string) {
       </a>
 
       <div class="mobile-language-picker">
-        <!-- Render language picker here for mobile if needed, or keeping it in sidebar bottom -->
+        <LanguagePicker />
       </div>
     </nav>
 
-    <LanguagePicker />
+    <div class="desktop-language-picker">
+      <LanguagePicker />
+    </div>
 
     <div
       class="navbar-icon-button w-nav-button"
