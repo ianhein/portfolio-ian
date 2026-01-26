@@ -1,13 +1,18 @@
 ---
-import Header from "../components/Header.astro";
-import Project from "../components/Project.astro";
-import Sidebar from "../components/Sidebar.astro";
-import { projectData } from "../i18n/data";
-import { useTranslations } from "../i18n/utils";
+import Header from "../../components/Header.astro";
+import Project from "../../components/Project.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import { projectData } from "../../i18n/data";
+import { ui } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
 
-const lang = "en";
-const t = useTranslations(lang);
-const projects = projectData[lang].personalProjects;
+export function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "pt" } }];
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof ui);
+const projects = projectData[lang as keyof typeof ui].personalProjects;
 ---
 
 <!doctype html>
@@ -19,7 +24,9 @@ const projects = projectData[lang].personalProjects;
       <nav class="main">
         <div class="container">
           <div class="back-nav-container">
-            <a href="/" class="back-nav-button w-inline-block"
+            <a
+              href={`/${lang === "en" ? "" : lang}`}
+              class="back-nav-button w-inline-block"
               ><img
                 src="/assets/back.svg"
                 loading="eager"

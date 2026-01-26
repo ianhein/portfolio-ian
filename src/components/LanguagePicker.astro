@@ -1,0 +1,83 @@
+---
+import { languages } from "../i18n/ui";
+
+const { lang = "en" } = Astro.params;
+
+function getPath(l: string) {
+  const currentPath = Astro.url.pathname;
+  const currentLang = currentPath.split("/")[1];
+
+  if (l === "en") {
+    // If target is English (default), remove language prefix if present
+    // Since we set prefixDefaultLocale: false, root is english.
+    // But if we are in /es/foo, we want /foo.
+    // If we in /es, we want /.
+
+    // Simpler approach:
+    // If current path starts with /es or /pt, replace it.
+    // If it starts with nothing (root), it's already en.
+
+    if (currentLang === "es" || currentLang === "pt") {
+      return currentPath.replace(`/${currentLang}`, "") || "/";
+    }
+    return currentPath;
+  }
+
+  // Target is ES or PT
+  // If current is default (en), add prefix
+  if (currentLang !== "es" && currentLang !== "pt") {
+    const path = currentPath === "/" ? "" : currentPath;
+    return `/${l}${path}`;
+  }
+
+  // Switch between non-default languages (es <-> pt)
+  return currentPath.replace(`/${currentLang}`, `/${l}`);
+}
+---
+
+<div class="language-picker">
+  {
+    Object.entries(languages).map(([key, label]) => (
+      <a
+        href={getPath(key)}
+        class={`lang-link ${lang === key || (key === "en" && lang === undefined) ? "active" : ""}`}
+        aria-label={`Change language to ${label}`}
+      >
+        {key.toUpperCase()}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .language-picker {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 20px;
+    /* border-top: 1px solid #353535; */
+  }
+
+  .lang-link {
+    color: #a8a8a8;
+    text-decoration: none;
+    font-size: 12px;
+    font-family: "IBM Plex Mono", monospace;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .lang-link:hover {
+    color: #fff;
+    background-color: #353535;
+  }
+
+  .lang-link.active {
+    color: #fff;
+    background-color: #353535;
+    border-color: #4a4a4a;
+    font-weight: 600;
+  }
+</style>

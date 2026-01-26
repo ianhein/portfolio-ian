@@ -1,8 +1,20 @@
 ---
-const { title, desc, tech } = Astro.props;
+const { title, desc, tech, url } = Astro.props;
 ---
 
 <div class="single-item">
+  {
+    url && (
+      <a href={url} target="_blank" class="project-image-link">
+        <img
+          src={`https://api.microlink.io/?url=${url}&screenshot=true&meta=false&embed=screenshot.url`}
+          alt={`Screenshot of ${title}`}
+          class="project-screenshot"
+          loading="lazy"
+        />
+      </a>
+    )
+  }
   <h3 set:html={title} />
   <div class="project-desc project-desc-list w-richtext">
     <ul role="list">
@@ -14,3 +26,25 @@ const { title, desc, tech } = Astro.props;
     {tech.map((techItem) => <div class="single-chip">{techItem}</div>)}
   </div>
 </div>
+
+<style>
+  .project-screenshot {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border: 1px solid #353535;
+    transition: transform 0.2s ease;
+  }
+
+  .project-image-link {
+    display: block;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .project-image-link:hover .project-screenshot {
+    transform: scale(1.02);
+  }
+</style>

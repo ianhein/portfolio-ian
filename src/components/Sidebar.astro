@@ -1,8 +1,19 @@
 ---
 import { Image } from "astro:assets";
 import ianImg from "../assets/ian.jpg";
+import LanguagePicker from "./LanguagePicker.astro";
+import { useTranslations } from "../i18n/utils";
+
+import { ui } from "../i18n/ui";
 
 const { selectedItem } = Astro.props;
+const { lang = "en" } = Astro.params;
+const t = useTranslations(lang as keyof typeof ui);
+
+function getLangPath(l: string, path: string) {
+  if (l === "en") return path;
+  return `/${l}${path}`;
+}
 ---
 
 <aside
@@ -15,12 +26,12 @@ const { selectedItem } = Astro.props;
   class="sidebar w-nav"
 >
   <div class="nav-content">
-    <a href="/" class="w-nav-brand" aria-label="home">
+    <a href={getLangPath(lang, "/")} class="w-nav-brand" aria-label="home">
       <div class="niv-data">
         <Image src={ianImg} loading="eager" alt="Ian" class="niv-image" />
         <div>
           <div class="label-white">Ian</div>
-          <div class="label-gray">Frontend Developer</div>
+          <div class="label-gray">{t("sidebar.role")}</div>
         </div>
       </div>
     </a>
@@ -80,7 +91,9 @@ const { selectedItem } = Astro.props;
     </div>
 
     <div class="sidebar-tech-stack">
-      <div class="label-white tech-stack-label">Tech Stack</div>
+      <div class="label-white tech-stack-label">
+        {t("sidebar.tech-stack")}
+      </div>
       <div class="tech-stack-container">
         <div class="tech-badge">React</div>
         <div class="tech-badge">Astro</div>
@@ -96,7 +109,7 @@ const { selectedItem } = Astro.props;
 
     <nav role="navigation" class="w-nav-menu">
       <a
-        href="/"
+        href={getLangPath(lang, "/")}
         class={`nav-link-container w-inline-block ${
           selectedItem === "home" ? "w--current" : ""
         }`}
@@ -107,10 +120,10 @@ const { selectedItem } = Astro.props;
           alt=""
           class="nav-link-image"
         />
-        <div>Home</div>
+        <div>{t("nav.home")}</div>
       </a>
       <a
-        href="/personal-projects"
+        href={getLangPath(lang, "/personal-projects")}
         class={`nav-link-container w-inline-block ${
           selectedItem === "personal-projects" ? "w--current" : ""
         }`}
@@ -121,9 +134,15 @@ const { selectedItem } = Astro.props;
           alt=""
           class="nav-link-image"
         />
-        <div>Personal Projects</div>
+        <div>{t("nav.personal-projects")}</div>
       </a>
+
+      <div class="mobile-language-picker">
+        <!-- Render language picker here for mobile if needed, or keeping it in sidebar bottom -->
+      </div>
     </nav>
+
+    <LanguagePicker />
 
     <div
       class="navbar-icon-button w-nav-button"

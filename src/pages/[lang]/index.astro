@@ -1,14 +1,18 @@
 ---
-import Header from "../components/Header.astro";
-import Sidebar from "../components/Sidebar.astro";
-import Project from "../components/Project.astro";
-import { projectData } from "../i18n/data";
-import { useTranslations } from "../i18n/utils";
+import Header from "../../components/Header.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import Project from "../../components/Project.astro";
+import { projectData } from "../../i18n/data";
+import { ui } from "../../i18n/ui";
+import { useTranslations } from "../../i18n/utils";
 
-// Default root is English
-const lang = "en";
-const t = useTranslations(lang);
-const projects = projectData[lang].projects;
+export function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "pt" } }];
+}
+
+const { lang } = Astro.params;
+const t = useTranslations(lang as keyof typeof ui);
+const projects = projectData[lang as keyof typeof ui].projects;
 ---
 
 <!doctype html>
