@@ -2,6 +2,17 @@ export const projectData = {
   en: {
     projects: [
       {
+        title: "CotoBarber",
+        desc: [
+          "Barbershop web application and management system",
+          "Internal dashboard for appointment tracking and revenue management",
+          "Analytics for most requested services and top-performing barbers",
+          "Google Calendar integration for direct scheduling, eliminating back-and-forth messaging",
+        ],
+        tech: ["React", "Next.js", "PostgreSQL"],
+        url: "https://cotobarber.com.ar",
+      },
+      {
         title: "Lácteos Tonutti - Industrial System",
         desc: [
           "Developed a comprehensive industrial management system",
@@ -71,6 +82,17 @@ export const projectData = {
   es: {
     projects: [
       {
+        title: "CotoBarber",
+        desc: [
+          "Aplicación web y sistema de gestión para una barbería",
+          "Dashboard interno para trackear turnos y ganancias",
+          "Métricas de servicios más pedidos y desempeño por barbero",
+          "Integración con Google Calendar para agendar turnos directamente y sin mensajes de ida y vuelta",
+        ],
+        tech: ["React", "Next.js", "PostgreSQL"],
+        url: "https://cotobarber.com.ar",
+      },
+      {
         title: "Lácteos Tonutti - Sistema Industrial",
         desc: [
           "Desarrollé un sistema integral de gestión industrial",
@@ -139,6 +161,17 @@ export const projectData = {
   },
   pt: {
     projects: [
+      {
+        title: "CotoBarber",
+        desc: [
+          "Aplicativo web e sistema de gestão para uma barbearia",
+          "Dashboard interno para rastrear agendamentos e receitas",
+          "Métricas para serviços mais solicitados e desempenho por barbeiro",
+          "Integração com o Google Calendar para agendamento direto sem troca de mensagens",
+        ],
+        tech: ["React", "Next.js", "PostgreSQL"],
+        url: "https://cotobarber.com.ar",
+      },
       {
         title: "Lácteos Tonutti - Sistema Industrial",
         desc: [
